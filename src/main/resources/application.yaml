@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: mycv-backend
+
+  security:
+    user:
+      name: disabled
+      password: disabled
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
