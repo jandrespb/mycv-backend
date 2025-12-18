@@ -34,3 +34,11 @@ build/
 
 ### VS Code ###
 .vscode/
+
+.DS_Store
+Thumbs.db
+
+#Files
+.env
+service-account.json
+
