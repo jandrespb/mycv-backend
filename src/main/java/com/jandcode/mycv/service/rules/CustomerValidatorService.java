@@ -82,7 +82,7 @@ public class CustomerValidatorService {
      */
     private void validateMaxRecords() {
 
-        int maxAllowedRecords = 20;
+        int maxAllowedRecords = 100;
         long currentCount = customerDataSource.count();
 
         if (currentCount >= maxAllowedRecords) {

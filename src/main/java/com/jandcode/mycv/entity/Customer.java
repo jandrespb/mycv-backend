@@ -6,12 +6,17 @@ import java.time.LocalDateTime;
 
 public class Customer {
 
+    private String id;
     private String customer;
     private String email;
     private String message;
     @JsonIgnore
     private String ip;
     private LocalDateTime createdAt;
+
+    public String getId() {
+        return id;
+    }
 
     public Customer() {
         this.createdAt = LocalDateTime.now();
@@ -27,6 +32,10 @@ public class Customer {
 
     public String getEmail() {
         return email;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setEmail(String email) {

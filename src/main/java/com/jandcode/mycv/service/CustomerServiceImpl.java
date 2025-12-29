@@ -2,7 +2,10 @@ package com.jandcode.mycv.service;
 
 import com.jandcode.mycv.dao.CustomerDataSource;
 import com.jandcode.mycv.entity.Customer;
+import com.jandcode.mycv.exception.GeneralErrorException;
 import com.jandcode.mycv.service.rules.CustomerValidatorService;
+import com.jandcode.mycv.utils.IdGeneratorUtil;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,16 +20,15 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public Customer save(Customer customer, String ipAddress) {
-        // 1️⃣  check business rules
-        customerValidatorService.validateCustomer(customer);
-        customerValidatorService.validateIpCustomer(customer, ipAddress);
-        customerValidatorService.validateUniqueEmail(customer);
+    public void save(Customer customer, String ipAddress) {
 
-        // 2️⃣ Enriquecemos el objeto
+        customerValidatorService.validateCustomer(customer);
+        customerValidatorService.validateUniqueEmail(customer);
+        customerValidatorService.validateIpCustomer(customer, ipAddress);
+
+        customer.setId(IdGeneratorUtil.generateRandomId());
         customer.setIp(ipAddress);
 
-        // 3️⃣ Persistence (Google Sheets vía DAO)
-        return customerDataSource.save(customer);
+        customerDataSource.save(customer);
     }
 }

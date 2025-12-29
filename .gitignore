@@ -40,5 +40,5 @@ Thumbs.db
 
 #Files
 .env
-service-account.json
+google-sheets.json
 
