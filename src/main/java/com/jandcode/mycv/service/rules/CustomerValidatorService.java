@@ -86,7 +86,8 @@ public class CustomerValidatorService {
         long currentCount = customerDataSource.count();
 
         if (currentCount >= maxAllowedRecords) {
-            throw new GeneralErrorException(Constants.MSG_MAX_RECORDS_EXCEEDED, HttpStatus.TOO_MANY_REQUESTS);
+            log.warn(Constants.MSG_MAX_RECORDS_EXCEEDED);
+            throw new GeneralErrorException(Constants.MSG_RATE, HttpStatus.TOO_MANY_REQUESTS);
         }
     }
 
@@ -105,8 +106,9 @@ public class CustomerValidatorService {
         byte quantityOfRecords = 2;
 
         if (customersFromIp.size() >= quantityOfRecords) {
+            log.warn(MessageFormat.format(Constants.MSG_IP_EMAIL_REGISTER, quantityOfRecords));
             throw new GeneralErrorException(
-                    MessageFormat.format(Constants.MSG_IP_EMAIL_REGISTER, quantityOfRecords),
+                    Constants.MSG_RATE,
                     HttpStatus.TOO_MANY_REQUESTS
             );
         }
@@ -115,8 +117,9 @@ public class CustomerValidatorService {
                 .anyMatch(c -> c.getEmail().equalsIgnoreCase(customer.getEmail()));
 
         if (sameEmailUsed) {
+            log.warn(Constants.MSG_SAME_EMAIL);
             throw new GeneralErrorException(
-                    Constants.MSG_SAME_EMAIL,
+                    Constants.MSG_VALIDATE,
                     HttpStatus.BAD_REQUEST
             );
         }
@@ -133,8 +136,9 @@ public class CustomerValidatorService {
     public void validateUniqueEmail(Customer customer) {
         boolean exists = customerDataSource.existsByEmail(customer.getEmail());
         if (exists) {
+            log.warn(Constants.MSG_SAME_EMAIL);
             throw new GeneralErrorException(
-                    Constants.MSG_SAME_EMAIL,
+                    Constants.MSG_VALIDATE,
                     HttpStatus.BAD_REQUEST
             );
         }
