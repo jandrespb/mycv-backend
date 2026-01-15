@@ -27,50 +27,59 @@ public class CustomerValidatorService {
 
     public void validateCustomer(Customer customer) {
 
-        //  Rule 1: Maximum Records Validation
+        // Rule 1: Maximum Records Validation
         validateMaxRecords();
 
-        // Rule 2, 3, 4: Field Validations
         for (CustomerFieldRule rule : CustomerFieldRule.values()) {
 
             String rawValue = extractFieldValue(customer, rule.getFieldName());
-            String sanitizedValue;
 
-            // --- Diferenciar tratamiento por campo ---
+            // 1️⃣ Normalización (esto es lo que valida el regex)
+            String normalizedValue = rawValue == null ? "" : rawValue.trim();
+
             if ("email".equals(rule.getFieldName())) {
-                // NO sanitizamos, solo normalizamos
-                sanitizedValue = rawValue == null ? "" : rawValue.trim().toLowerCase();
-            } else {
-                // customer y message sí pasan por sanitizador + trim
-                sanitizedValue = HtmlSanitizerUtil.sanitize(rawValue == null ? "" : rawValue).trim();
+                normalizedValue = normalizedValue.toLowerCase();
             }
 
-            log.debug("FIELD {} RAW='{}' SANITIZED='{}'", rule.getFieldName(), rawValue, sanitizedValue);
+            log.debug("FIELD {} RAW='{}' NORMALIZED='{}'",
+                    rule.getFieldName(), rawValue, normalizedValue);
 
-            assignSanitizedValue(customer, rule.getFieldName(), sanitizedValue);
-
-            // --- Validaciones ---
+            // 2️⃣ Validaciones sobre el valor NORMALIZADO
             formWebUtils.validatedEmptyText(
-                    sanitizedValue,
+                    normalizedValue,
                     MessageFormat.format(Constants.MSG_EMPTY_FIELDS, rule.getFieldName()),
                     HttpStatus.BAD_REQUEST
             );
 
             formWebUtils.validatedMaxLength(
-                    sanitizedValue,
+                    normalizedValue,
                     rule.getFieldName(),
                     rule.getMaxLength(),
                     HttpStatus.BAD_REQUEST
             );
 
             formWebUtils.validatedAllowedCharacters(
-                    sanitizedValue,
+                    normalizedValue,
                     rule.getFieldName(),
                     rule.getRegex(),
                     HttpStatus.BAD_REQUEST
             );
-        }
 
+            // 3️⃣ Sanitización SOLO para persistencia
+            String sanitizedValue;
+
+            if ("email".equals(rule.getFieldName())) {
+                sanitizedValue = normalizedValue;
+            } else {
+                sanitizedValue = HtmlSanitizerUtil.sanitize(normalizedValue);
+            }
+
+            log.debug("FIELD {} SANITIZED_FOR_STORAGE='{}'",
+                    rule.getFieldName(), sanitizedValue);
+
+            // 4️⃣ Asignar valor final al objeto
+            assignSanitizedValue(customer, rule.getFieldName(), sanitizedValue);
+        }
     }
 
     /**

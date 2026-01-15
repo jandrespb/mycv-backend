@@ -8,7 +8,9 @@ public enum CustomerFieldRule {
      * */
     CUSTOMER("customer", 100, "^[A-Za-zÀ-ÿÑñ]+( [A-Za-zÀ-ÿÑñ]+)*$"),
     EMAIL("email", 320, "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"),
-    MESSAGE("message", 500, "^(?!.* {2,})(?! )(?!.* $)[a-zA-ZÀ-ÿ0-9.,;?¿!\\-_\\$ ]+$");
+    MESSAGE("message", 500,
+            "^(?!.*[=@])(?!.* {2,})(?! )(?!.* $)[a-zA-ZÀ-ÿ0-9.,;?¿!()\\+\\-_\\$ ]+$"
+    );
 
 
     private final String fieldName;
