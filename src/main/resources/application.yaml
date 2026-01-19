@@ -19,6 +19,3 @@ google:
   sheets:
     spreadsheet-id: ${GOOGLE_SHEETS_SPREADSHEET_ID}
     sheet-name: ${GOOGLE_SHEETS_SHEET_NAME}
-    credentials-path: ${GOOGLE_SHEETS_CREDENTIALS_PATH}
-
-

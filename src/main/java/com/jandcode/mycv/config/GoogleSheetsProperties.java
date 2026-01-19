@@ -9,7 +9,6 @@ public class GoogleSheetsProperties {
 
     private String spreadsheetId;
     private String sheetName;
-    private String credentialsPath;
 
     public String getSpreadsheetId() {
         return spreadsheetId;
@@ -25,13 +24,5 @@ public class GoogleSheetsProperties {
 
     public void setSheetName(String sheetName) {
         this.sheetName = sheetName;
-    }
-
-    public String getCredentialsPath() {
-        return credentialsPath;
-    }
-
-    public void setCredentialsPath(String credentialsPath) {
-        this.credentialsPath = credentialsPath;
     }
 }
