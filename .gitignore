@@ -40,5 +40,5 @@ Thumbs.db
 
 #Files
 .env
-google-sheets.json
+/src/main/resources/credentials
 
