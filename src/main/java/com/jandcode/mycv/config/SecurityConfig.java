@@ -46,7 +46,8 @@ public class SecurityConfig {
         config.setAllowedOrigins(List.of(
                 "http://localhost:5500",
                 "http://127.0.0.1:5500",
-                "https://papaya-kelpie-3b934f.netlify.app"
+                "https://jandtocode.com",
+                "https://www.jandtocode.com"
         ));
 
         config.setAllowedMethods(List.of(
