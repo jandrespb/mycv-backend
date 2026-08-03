@@ -18,17 +18,23 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-                // API stateless
+                // ✅ DESHABILITA CSRF (porque es portafolio, sin sesiones)
                 .csrf(csrf -> csrf.disable())
 
+                // ✅ ACTIVA CORS
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
                 .authorizeHttpRequests(auth -> auth
-
+                        // Permite OPTIONS (preflight de CORS)
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
+                        // Permite GET /health sin autenticación
                         .requestMatchers(HttpMethod.GET, "/api/customers/health").permitAll()
+
+                        // Permite POST /save sin autenticación
                         .requestMatchers(HttpMethod.POST, "/api/customers/save").permitAll()
+
+                        // Rechaza todo lo demás
                         .anyRequest().denyAll()
                 )
 
@@ -43,6 +49,7 @@ public class SecurityConfig {
 
         CorsConfiguration config = new CorsConfiguration();
 
+        // ✅ Orígenes permitidos
         config.setAllowedOrigins(List.of(
                 "http://localhost:5500",
                 "http://127.0.0.1:5500",
@@ -50,13 +57,24 @@ public class SecurityConfig {
                 "https://www.jandtocode.com"
         ));
 
-        config.setAllowedMethods(List.of(
-                "GET", "POST", "OPTIONS"
+        // ✅ Métodos HTTP permitidos
+        config.setAllowedMethods(List.of("GET", "POST", "OPTIONS"));
+
+        // ✅ Headers específicos (no "*")
+        config.setAllowedHeaders(List.of(
+                "Content-Type",
+                "Accept",
+                "Authorization"
         ));
 
-        config.setAllowedHeaders(List.of("*"));
+        // ✅ Headers que el navegador puede leer
+        config.setExposedHeaders(List.of("Content-Type"));
 
+        // ✅ No permite credenciales (cookies)
         config.setAllowCredentials(false);
+
+        // ✅ Cache del preflight por 1 hora
+        config.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
