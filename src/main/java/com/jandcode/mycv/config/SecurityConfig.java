@@ -31,6 +31,8 @@ public class SecurityConfig {
                         // Permite GET /health sin autenticación
                         .requestMatchers(HttpMethod.GET, "/api/customers/health").permitAll()
 
+                        .requestMatchers(HttpMethod.GET, "/api/portfolio/content").permitAll()
+
                         // Permite POST /save sin autenticación
                         .requestMatchers(HttpMethod.POST, "/api/customers/save").permitAll()
 
@@ -64,7 +66,8 @@ public class SecurityConfig {
         config.setAllowedHeaders(List.of(
                 "Content-Type",
                 "Accept",
-                "Authorization"
+                "Authorization",
+                "Accept-Language"
         ));
 
         // ✅ Headers que el navegador puede leer
