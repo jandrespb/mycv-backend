@@ -4,6 +4,7 @@ import java.util.List;
 
 public class PortfolioProfile {
 
+    private List<String> profileCards;
     private String jandtocodeTitle;
     private String jandtocodeSubtitle;
     private String jandtocodeContent;
@@ -18,10 +19,11 @@ public class PortfolioProfile {
     public PortfolioProfile() {
     }
 
-    public PortfolioProfile(String jandtocodeTitle, String jandtocodeSubtitle, String jandtocodeContent,
+    public PortfolioProfile(List<String> profileCards, String jandtocodeTitle, String jandtocodeSubtitle, String jandtocodeContent,
                             List<String> experienceOptions, String experienceAutoWeb, String experienceAutoMobile,
                             String experiencePerformance, String experienceDevFront, String experienceDevBack,
                             List<String> knowledgeLib) {
+        this.profileCards = profileCards;
         this.jandtocodeTitle = jandtocodeTitle;
         this.jandtocodeSubtitle = jandtocodeSubtitle;
         this.jandtocodeContent = jandtocodeContent;
@@ -32,6 +34,14 @@ public class PortfolioProfile {
         this.experienceDevFront = experienceDevFront;
         this.experienceDevBack = experienceDevBack;
         this.knowledgeLib = knowledgeLib;
+    }
+
+    public List<String> getProfileCards() {
+        return profileCards;
+    }
+
+    public void setProfileCards(List<String> profileCards) {
+        this.profileCards = profileCards;
     }
 
     public String getJandtocodeTitle() {
