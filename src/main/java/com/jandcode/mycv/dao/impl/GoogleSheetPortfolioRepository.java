@@ -33,7 +33,7 @@ public class GoogleSheetPortfolioRepository implements PortfolioDataSource {
             String sheetName = language.startsWith("es") ? "mycv-es" : "mycv-en";
 
             ValueRange response = sheets.spreadsheets().values()
-                    .get(spreadsheetId, sheetName + "!A2:M2")
+                    .get(spreadsheetId, sheetName + "!A2:AB")
                     .execute();
 
             List<List<Object>> values = response.getValues();
@@ -82,7 +82,37 @@ public class GoogleSheetPortfolioRepository implements PortfolioDataSource {
                     conocimientosLib
             );
 
-            return new PortfolioResponse(null, principal, null, profile);
+            // Projects
+            List<String> projectMenu = Arrays.stream(
+                            row.get(13).toString().replace("[", "").replace("]", "")
+                                    .split(","))
+                                    .map(String::trim)
+                                    .toList();
+
+            String projectTitle = row.get(14).toString();
+            String projectCardOneTitle = row.get(15).toString();
+            String projectCardOneDescription = row.get(16).toString();
+            String projectCardOneUrl = row.get(17).toString();
+            String projectCardTwoTitle = row.get(18).toString();
+            String projectCardTwoDescription = row.get(19).toString();
+            String projectCardTwoUrl = row.get(20).toString();
+            String projectCardThreeTitle = row.get(21).toString();
+            String projectCardThreeDescription = row.get(22).toString();
+            String projectCardThreeUrl = row.get(23).toString();
+            String projectCardFourTitle = row.get(24).toString();
+            String projectCardFourDescription = row.get(25).toString();
+            String projectCardFourUrl = row.get(26).toString();
+            String projectCardBtn = row.get(27).toString();
+
+            PortfolioProjects projects = new PortfolioProjects(
+                    projectMenu, projectTitle, projectCardOneTitle, projectCardOneDescription,
+                    projectCardOneUrl, projectCardTwoTitle, projectCardTwoDescription,
+                    projectCardTwoUrl, projectCardThreeTitle, projectCardThreeDescription,
+                    projectCardThreeUrl, projectCardFourTitle, projectCardFourDescription,
+                    projectCardFourUrl, projectCardBtn
+            );
+
+            return new PortfolioResponse(null, principal, projects, profile);
 
         } catch (Exception e) {
             throw new RuntimeException("Error reading portfolio content from Google Sheets", e);
