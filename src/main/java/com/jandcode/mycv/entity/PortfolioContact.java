@@ -1,6 +1,7 @@
 package com.jandcode.mycv.entity;
 
 import java.util.List;
+import java.util.Map;
 
 public class PortfolioContact {
 
@@ -12,12 +13,13 @@ public class PortfolioContact {
     private String contactFormEmail;
     private String contactFormMessage;
     private String contactFormBtn;
+    private Map<String, String> contactMessage;
 
     public PortfolioContact() {}
 
     public PortfolioContact(List<String> contactMenu, String contactTitle, String contactDescription,
                             String contactEmail, String contactFormName, String contactFormEmail,
-                            String contactFormMessage, String contactFormBtn) {
+                            String contactFormMessage, String contactFormBtn, Map<String, String> contactMessage) {
         this.contactMenu = contactMenu;
         this.contactTitle = contactTitle;
         this.contactDescription = contactDescription;
@@ -26,6 +28,7 @@ public class PortfolioContact {
         this.contactFormEmail = contactFormEmail;
         this.contactFormMessage = contactFormMessage;
         this.contactFormBtn = contactFormBtn;
+        this.contactMessage = contactMessage;
     }
 
     public List<String> getContactMenu() {
@@ -90,5 +93,13 @@ public class PortfolioContact {
 
     public void setContactFormBtn(String contactFormBtn) {
         this.contactFormBtn = contactFormBtn;
+    }
+
+    public Map<String, String> getContactMessage() {
+        return contactMessage;
+    }
+
+    public void setContactMessage(Map<String, String> contactMessage) {
+        this.contactMessage = contactMessage;
     }
 }
