@@ -5,38 +5,24 @@ import java.util.Map;
 
 public class PortfolioPrincipal {
 
-    private String principalTitle;
-    private String principalDescription;
+    private Map<String, String> principalContainer;
     private List<String> principalNav;
     private Map<String, String> principalMessage;
 
-    // Constructor
-    public PortfolioPrincipal() {
-    }
+    public PortfolioPrincipal() {}
 
-    public PortfolioPrincipal(String principalTitle, String principalDescription, List<String> principalNav, Map<String, String> principalMessage) {
-        this.principalTitle = principalTitle;
-        this.principalDescription = principalDescription;
+    public PortfolioPrincipal(Map<String, String> principalContainer, List<String> principalNav, Map<String, String> principalMessage) {
+        this.principalContainer = principalContainer;
         this.principalNav = principalNav;
         this.principalMessage = principalMessage;
     }
 
-    // Getters and Setters
-
-    public String getPrincipalTitle() {
-        return principalTitle;
+    public Map<String, String> getPrincipalContainer() {
+        return principalContainer;
     }
 
-    public void setPrincipalTitle(String principalTitle) {
-        this.principalTitle = principalTitle;
-    }
-
-    public String getPrincipalDescription() {
-        return principalDescription;
-    }
-
-    public void setPrincipalDescription(String principalDescription) {
-        this.principalDescription = principalDescription;
+    public void setPrincipalContainer(Map<String, String> principalContainer) {
+        this.principalContainer = principalContainer;
     }
 
     public List<String> getPrincipalNav() {

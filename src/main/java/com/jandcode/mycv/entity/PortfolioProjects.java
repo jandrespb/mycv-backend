@@ -1,46 +1,22 @@
 package com.jandcode.mycv.entity;
 
 import java.util.List;
+import java.util.Map;
 
 public class PortfolioProjects {
 
     private List<String> projectMenu;
-    private String projectTitle;
-    private String projectCardOneTitle;
-    private String projectCardOneDescription;
-    private String projectCardOneUrl;
-    private String projectCardTwoTitle;
-    private String projectCardTwoDescription;
-    private String projectCardTwoUrl;
-    private String projectCardThreeTitle;
-    private String projectCardThreeDescription;
-    private String projectCardThreeUrl;
-    private String projectCardFourTitle;
-    private String projectCardFourDescription;
-    private String projectCardFourUrl;
+    private Map<String, String> projectContainer;
+    private List<Map<String, String>> projectCards;
     private String projectCardBtn;
 
     public PortfolioProjects() {}
 
-    public PortfolioProjects(List<String> projectMenu, String projectTitle, String projectCardOneTitle,
-                             String projectCardOneDescription, String projectCardOneUrl, String projectCardTwoTitle,
-                             String projectCardTwoDescription, String projectCardTwoUrl, String projectCardThreeTitle,
-                             String projectCardThreeDescription, String projectCardThreeUrl, String projectCardFourTitle,
-                             String projectCardFourDescription, String projectCardFourUrl, String projectCardBtn) {
+    public PortfolioProjects(List<String> projectMenu, Map<String, String> projectContainer,
+                             List<Map<String, String>> projectCards, String projectCardBtn) {
         this.projectMenu = projectMenu;
-        this.projectTitle = projectTitle;
-        this.projectCardOneTitle = projectCardOneTitle;
-        this.projectCardOneDescription = projectCardOneDescription;
-        this.projectCardOneUrl = projectCardOneUrl;
-        this.projectCardTwoTitle = projectCardTwoTitle;
-        this.projectCardTwoDescription = projectCardTwoDescription;
-        this.projectCardTwoUrl = projectCardTwoUrl;
-        this.projectCardThreeTitle = projectCardThreeTitle;
-        this.projectCardThreeDescription = projectCardThreeDescription;
-        this.projectCardThreeUrl = projectCardThreeUrl;
-        this.projectCardFourTitle = projectCardFourTitle;
-        this.projectCardFourDescription = projectCardFourDescription;
-        this.projectCardFourUrl = projectCardFourUrl;
+        this.projectContainer = projectContainer;
+        this.projectCards = projectCards;
         this.projectCardBtn = projectCardBtn;
     }
 
@@ -52,108 +28,20 @@ public class PortfolioProjects {
         this.projectMenu = projectMenu;
     }
 
-    public String getProjectTitle() {
-        return projectTitle;
+    public Map<String, String> getProjectContainer() {
+        return projectContainer;
     }
 
-    public void setProjectTitle(String projectTitle) {
-        this.projectTitle = projectTitle;
+    public void setProjectContainer(Map<String, String> projectContainer) {
+        this.projectContainer = projectContainer;
     }
 
-    public String getProjectCardOneTitle() {
-        return projectCardOneTitle;
+    public List<Map<String, String>> getProjectCards() {
+        return projectCards;
     }
 
-    public void setProjectCardOneTitle(String projectCardOneTitle) {
-        this.projectCardOneTitle = projectCardOneTitle;
-    }
-
-    public String getProjectCardOneDescription() {
-        return projectCardOneDescription;
-    }
-
-    public void setProjectCardOneDescription(String projectCardOneDescription) {
-        this.projectCardOneDescription = projectCardOneDescription;
-    }
-
-    public String getProjectCardOneUrl() {
-        return projectCardOneUrl;
-    }
-
-    public void setProjectCardOneUrl(String projectCardOneUrl) {
-        this.projectCardOneUrl = projectCardOneUrl;
-    }
-
-    public String getProjectCardTwoTitle() {
-        return projectCardTwoTitle;
-    }
-
-    public void setProjectCardTwoTitle(String projectCardTwoTitle) {
-        this.projectCardTwoTitle = projectCardTwoTitle;
-    }
-
-    public String getProjectCardTwoDescription() {
-        return projectCardTwoDescription;
-    }
-
-    public void setProjectCardTwoDescription(String projectCardTwoDescription) {
-        this.projectCardTwoDescription = projectCardTwoDescription;
-    }
-
-    public String getProjectCardTwoUrl() {
-        return projectCardTwoUrl;
-    }
-
-    public void setProjectCardTwoUrl(String projectCardTwoUrl) {
-        this.projectCardTwoUrl = projectCardTwoUrl;
-    }
-
-    public String getProjectCardThreeTitle() {
-        return projectCardThreeTitle;
-    }
-
-    public void setProjectCardThreeTitle(String projectCardThreeTitle) {
-        this.projectCardThreeTitle = projectCardThreeTitle;
-    }
-
-    public String getProjectCardThreeDescription() {
-        return projectCardThreeDescription;
-    }
-
-    public void setProjectCardThreeDescription(String projectCardThreeDescription) {
-        this.projectCardThreeDescription = projectCardThreeDescription;
-    }
-
-    public String getProjectCardThreeUrl() {
-        return projectCardThreeUrl;
-    }
-
-    public void setProjectCardThreeUrl(String projectCardThreeUrl) {
-        this.projectCardThreeUrl = projectCardThreeUrl;
-    }
-
-    public String getProjectCardFourTitle() {
-        return projectCardFourTitle;
-    }
-
-    public void setProjectCardFourTitle(String projectCardFourTitle) {
-        this.projectCardFourTitle = projectCardFourTitle;
-    }
-
-    public String getProjectCardFourDescription() {
-        return projectCardFourDescription;
-    }
-
-    public void setProjectCardFourDescription(String projectCardFourDescription) {
-        this.projectCardFourDescription = projectCardFourDescription;
-    }
-
-    public String getProjectCardFourUrl() {
-        return projectCardFourUrl;
-    }
-
-    public void setProjectCardFourUrl(String projectCardFourUrl) {
-        this.projectCardFourUrl = projectCardFourUrl;
+    public void setProjectCards(List<Map<String, String>> projectCards) {
+        this.projectCards = projectCards;
     }
 
     public String getProjectCardBtn() {
