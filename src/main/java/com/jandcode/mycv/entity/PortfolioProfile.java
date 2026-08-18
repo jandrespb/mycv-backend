@@ -5,18 +5,27 @@ import java.util.Map;
 
 public class PortfolioProfile {
 
+    private List<String> profileNameCards;
     private Map<String, String> profileCardJandToCode;
-    private Map<String, List<Map<String, String>>> profileCardExperience;
+    private Map<String, Object> profileCardExperience;
     private Map<String, Object> profileCardKnowledge;
 
     public PortfolioProfile() {
     }
 
-    public PortfolioProfile(Map<String, String> profileCardJandToCode, Map<String, List<Map<String,
-            String>>> profileCardExperience, Map<String, Object> profileCardKnowledge) {
+    public PortfolioProfile(List<String> profileNameCards, Map<String, String> profileCardJandToCode, Map<String, Object> profileCardExperience, Map<String, Object> profileCardKnowledge) {
+        this.profileNameCards = profileNameCards;
         this.profileCardJandToCode = profileCardJandToCode;
         this.profileCardExperience = profileCardExperience;
         this.profileCardKnowledge = profileCardKnowledge;
+    }
+
+    public List<String> getProfileNameCards() {
+        return profileNameCards;
+    }
+
+    public void setProfileNameCards(List<String> profileNameCards) {
+        this.profileNameCards = profileNameCards;
     }
 
     public Map<String, String> getProfileCardJandToCode() {
@@ -27,11 +36,11 @@ public class PortfolioProfile {
         this.profileCardJandToCode = profileCardJandToCode;
     }
 
-    public Map<String, List<Map<String, String>>> getProfileCardExperience() {
+    public Map<String, Object> getProfileCardExperience() {
         return profileCardExperience;
     }
 
-    public void setProfileCardExperience(Map<String, List<Map<String, String>>> profileCardExperience) {
+    public void setProfileCardExperience(Map<String, Object> profileCardExperience) {
         this.profileCardExperience = profileCardExperience;
     }
 
