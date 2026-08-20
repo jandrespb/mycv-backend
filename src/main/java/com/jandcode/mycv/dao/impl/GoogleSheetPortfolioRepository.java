@@ -36,7 +36,7 @@ public class GoogleSheetPortfolioRepository implements PortfolioDataSource {
             String sheetName = language.startsWith("es") ? "mycv-es" : "mycv-en";
 
             ValueRange response = sheets.spreadsheets().values()
-                    .get(spreadsheetId, sheetName + "!A2:T2")
+                    .get(spreadsheetId, sheetName + "!A2:U2")
                     .execute();
 
             List<List<Object>> values = response.getValues();
@@ -101,55 +101,58 @@ public class GoogleSheetPortfolioRepository implements PortfolioDataSource {
         ));
 
         Map<String, Object> profileCardKnowledge = new LinkedHashMap<>();
-        profileCardKnowledge.put("languages", SheetParserUtils.parseLanguages(
+        profileCardKnowledge.put("tableKnowledgeName", SheetParserUtils.parseSimpleList(
                 row.get(9).toString()
         ));
-        profileCardKnowledge.put("frameworks", SheetParserUtils.parseSimpleList(
+        profileCardKnowledge.put("languages", SheetParserUtils.parseLanguages(
                 row.get(10).toString()
         ));
-        profileCardKnowledge.put("patternDesigns", SheetParserUtils.parseSimpleList(
+        profileCardKnowledge.put("frameworks", SheetParserUtils.parseSimpleList(
                 row.get(11).toString()
+        ));
+        profileCardKnowledge.put("patternDesigns", SheetParserUtils.parseSimpleList(
+                row.get(12).toString()
         ));
 
         return new PortfolioProfile(profileNameCards, profileCardJandToCode, profileCardExperience, profileCardKnowledge);
     }
 
-    // ─── Projects (M, N, O, P) ────────────────────────────────────────────────
+    // ─── Projects (N, O, P, Q) ────────────────────────────────────────────────
     private PortfolioProjects buildProjects(List<Object> row) {
         List<String> projectMenu = SheetParserUtils.parseSimpleList(
-                row.get(12).toString()
+                row.get(13).toString()
         );
 
         Map<String, String> projectContainer = SheetParserUtils.parseMap(
-                row.get(13).toString(), "title"
+                row.get(14).toString(), "title"
         );
 
         List<Map<String, String>> projectCards = SheetParserUtils.parseObjectList(
-                row.get(14).toString(), "title", "description", "url"
+                row.get(15).toString(), "title", "description", "url"
         );
 
-        String projectCardBtn = row.get(15).toString();
+        String projectCardBtn = row.get(16).toString();
 
         return new PortfolioProjects(projectMenu, projectContainer, projectCards, projectCardBtn);
     }
 
-    // ─── Contact (Q, R, S, T) ─────────────────────────────────────────────────
+    // ─── Contact (R, S, T, U) ─────────────────────────────────────────────────
     private PortfolioContact buildContact(List<Object> row) {
         List<String> contactMenu = SheetParserUtils.parseSimpleList(
-                row.get(16).toString()
+                row.get(17).toString()
         );
 
         Map<String, String> contactContainer = SheetParserUtils.parseMap(
-                row.get(17).toString(), "title", "description", "email"
+                row.get(18).toString(), "title", "description", "email"
         );
 
         Map<String, String> formFields = SheetParserUtils.parseMap(
-                row.get(18).toString(),
+                row.get(19).toString(),
                 "placeholderName", "placeholderEmail", "placeholderMessage", "buttonSubmit"
         );
 
         Map<String, String> contactMessage = SheetParserUtils.parseMap(
-                row.get(19).toString(),
+                row.get(20).toString(),
                 "processing", "success", "error400", "error429",
                 "errorGeneral", "processingBtn", "btnText"
         );
