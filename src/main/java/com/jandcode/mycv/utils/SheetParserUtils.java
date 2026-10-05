@@ -63,14 +63,18 @@ public class SheetParserUtils {
 
     // ─── Score helper: ["java","9","0","%"] → [9, 0] ────────────────────────
     private static List<Integer> parseScore(String[] fields) {
-        List<Integer> score = new ArrayList<>();
+        return List.of(
+                parseIntSafe(fields, 1),
+                parseIntSafe(fields, 2)
+        );
+    }
+
+    private static int parseIntSafe(String[] fields, int index) {
+        if (fields.length <= index) return 0;
         try {
-            if (fields.length > 1) score.add(Integer.parseInt(fields[1].trim()));
-            if (fields.length > 2) score.add(Integer.parseInt(fields[2].trim()));
+            return Integer.parseInt(fields[index].trim());
         } catch (NumberFormatException e) {
-            score.add(0);
-            score.add(0);
+            return 0;
         }
-        return score;
     }
 }

@@ -31,7 +31,10 @@ public class CustomerController {
             HttpServletRequest request
     ) {
 
-        String ip = request.getRemoteAddr();
+        String forwarded = request.getHeader("X-Forwarded-For");
+        String ip = (forwarded != null && !forwarded.isBlank())
+                ? forwarded.split(",")[0].trim()
+                : request.getRemoteAddr();
 
         customerService.save(customer, ip);
 
